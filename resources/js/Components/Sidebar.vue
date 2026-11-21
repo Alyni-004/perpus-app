@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
         <nav class="space-y-2"> 
             <Link href="/dashboard" class="block hover:text-gray-300">Dashboard</Link> 
             <Link href="/books" class="block hover:text-gray-300">Data Buku</Link> 
-            <Link href="#" class="block hover:text-gray-300">Data Anggota</Link> 
+            <Link href="/members" class="block hover:text-gray-300">Data Anggota</Link> 
             <Link href="/" class="block hover:text-gray-300">Beranda</Link> 
         </nav> 
     </aside> 

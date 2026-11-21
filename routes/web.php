@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\MemberController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -27,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('books', BookController::class);
+    Route::resource('members', MemberController::class); 
 });
 
 require __DIR__.'/auth.php';

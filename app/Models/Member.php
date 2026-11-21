@@ -11,6 +11,7 @@ class Member extends Model
         'nama',
         'nis_nim',
         'no_hp',
+        'foto', // baris baru: mengizinkan kolom foto diisi 
     ];
 
     use hasFactory;
