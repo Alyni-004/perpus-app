@@ -25,6 +25,20 @@ class BookController extends Controller
     }
 
     /**
+     * Endpoint JSON untuk validasi realtime: apakah kode_buku masih tersedia?
+     */
+    public function cekKode(Request $request)
+    {
+        $kodeBuku = $request->query('kode_buku', '');
+
+        $sudahDipakai = Book::where('kode_buku', $kodeBuku)->exists();
+
+        return response()->json([
+            'tersedia' => ! $sudahDipakai,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -68,6 +82,30 @@ class BookController extends Controller
             'book' => $book
         ]);
     }
+
+    /**
+     * Endpoint JSON untuk live search buku (dipanggil oleh Axios).
+     */
+    public function search(Request $request)
+    {
+        // Kata kunci dibaca dari query string, misalnya /books/search?q=laravel
+        $kataKunci = $request->query('q', '');
+
+        // Dua kondisi (judul ATAU pengarang) dikelompokkan di dalam satu function,
+        // lalu diambil maksimal 10 baris dengan kolom yang diperlukan saja
+        $books = Book::where(function ($query) use ($kataKunci) {
+            $query->where('judul', 'like', "%{$kataKunci}%")
+                ->orWhere('pengarang', 'like', "%{$kataKunci}%")
+                ->orWhere('penerbit', 'like', "%{$kataKunci}%");
+        })
+            ->latest()
+            ->limit(10)
+            ->get(['id', 'kode_buku', 'judul', 'pengarang', 'penerbit', 'stok']);
+
+        // response()->json() mengirim data mentah (JSON), bukan halaman Inertia
+        return response()->json($books);
+    }
+
 
     /**
      * Update the specified resource in storage.

@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('books/search', [BookController::class, 'search']) ->name('books.search'); 
+    Route::get('members/search', [MemberController::class,'search']) ->name('members.search'); 
+    Route::get('members/cek-nis', [MemberController::class, 'cekNis']) ->name('members.cek-nis'); 
+    Route::get('books/cek-kode', [BookController::class, 'cekKode']) ->name('books.cek-kode');
     Route::resource('books', BookController::class);
     Route::resource('members', MemberController::class); 
 });
