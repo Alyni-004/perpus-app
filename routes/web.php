@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\LoanController; 
 
 
 Route::get('/', function () {
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('books/cek-kode', [BookController::class, 'cekKode']) ->name('books.cek-kode');
     Route::resource('books', BookController::class);
     Route::resource('members', MemberController::class); 
+    Route::resource('loans', LoanController::class)->only('index', 'create', 'store'); 
 });
 
 require __DIR__.'/auth.php';

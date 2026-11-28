@@ -8,7 +8,10 @@ import { Link } from '@inertiajs/vue3';
         <nav class="space-y-2"> 
             <Link href="/dashboard" class="block hover:text-gray-300">Dashboard</Link> 
             <Link href="/books" class="block hover:text-gray-300">Data Buku</Link> 
-            <Link href="/members" class="block hover:text-gray-300">Data Anggota</Link> 
+            <Link href="/members" class="block hover:text-gray-300">Data Anggota</Link>
+            <!-- Baris baru: menu menuju daftar peminjaman, href sama dengan 
+            Route::resource('loans', ...) --> 
+            <Link href="/loans" class="block hover:text-gray-300">Peminjaman</Link> 
             <Link href="/" class="block hover:text-gray-300">Beranda</Link> 
         </nav> 
     </aside> 
